@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 var natural = require('../lib/natural');
 var sinon = require('sinon');
-var baseClassifier = require('lib/natural/classifiers/classifier.js');
+var baseClassifier = require('../lib/natural/classifiers/classifier.js');
 
 describe('bayes classifier', function() {
     describe('classifier', function() {

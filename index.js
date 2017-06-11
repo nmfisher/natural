@@ -22,3 +22,7 @@ THE SOFTWARE.
 
 module.exports = require('./lib/natural/');
 
+var exists = function (a,b,c) {
+ // dummy function to stop error thrown in natural library
+ // DO NOT DELETE
+}
