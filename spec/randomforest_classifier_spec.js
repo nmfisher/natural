@@ -26,7 +26,7 @@ var baseClassifier = require('../lib/natural/classifiers/classifier.js');
 
 describe('RF classifier', function() {
     describe('classifier', function() {
-        it('should classify with arrays', function() {
+         it('should classify with arrays', function() {
             
             // random forest are not deterministic, check on average it works            
             var classifier = new natural.RandomForestClassifier();
@@ -143,7 +143,7 @@ describe('RF classifier', function() {
             // Should now be good, original docs should be unaffected
             expect(classifier.classify('foo')).toBe('good');
             expect(classifier.classify('qux')).toBe('good');  
-        });
+        }); 
 
          it('should serialize and deserialize a working classifier', function() {
             var classifier = new natural.RandomForestClassifier();
@@ -154,8 +154,8 @@ describe('RF classifier', function() {
             classifier.addDocument('read a book', 'literature');
             classifier.addDocument('study the books', 'literature');
 
-	    var obj = JSON.stringify(classifier);
-	    var newClassifier = natural.RandomForestClassifier.restore(JSON.parse(obj));
+            var obj = JSON.stringify(classifier);
+            var newClassifier = natural.RandomForestClassifier.restore(JSON.parse(obj));
 
             newClassifier.addDocument('kick a ball', 'sports');
             newClassifier.addDocument('hit some balls', 'sports');
@@ -166,9 +166,17 @@ describe('RF classifier', function() {
             expect(newClassifier.classify('a bug in the code')).toBe('computing');
             expect(newClassifier.classify('read all the books')).toBe('literature');
             expect(newClassifier.classify('kick butt')).toBe('sports');
+            
+            newClassifier = JSON.stringify(newClassifier);
+            newClassifier = natural.RandomForestClassifier.restore(JSON.parse(newClassifier));
+            
+            expect(newClassifier.classify('a bug in the code')).toBe('computing');
+
+
+
         });
 
-	it('should save and load a working classifier', function() {
+ 	it('should save and load a working classifier', function() {
         var classifier = new natural.RandomForestClassifier();
 	    classifier.addDocument('i fixed the box', 'computing');
 	    classifier.addDocument('i write code', 'computing');
@@ -180,7 +188,7 @@ describe('RF classifier', function() {
 	    classifier.train();
 
         classifier.save('bayes_classifier.json', function(err) {
-            natural.RandomForestClassifier.load('bayes_classifier.json', null,
+        natural.RandomForestClassifier.load('bayes_classifier.json', null,
             function(err, newClassifier){
                   newClassifier.addDocument('kick a ball', 'sports');
                   newClassifier.addDocument('hit some balls', 'sports');
@@ -227,7 +235,7 @@ describe('RF classifier', function() {
                 expect(err).toBe.ok;
                 expect(newClassifier).not.toBe.ok;
             });
-        });
+        }); 
     }); 
 });
 
